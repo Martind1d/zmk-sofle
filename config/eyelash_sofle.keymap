@@ -109,24 +109,6 @@
             display-name = "layer2";
             sensor-bindings = <&scroll_encoder>;
         };
-    }; // <-- End of keymap
-    // --- THIS IS THE NEW, RELIABLE FIX FOR YOUR "å" KEY ---
+    }; 
 
-    key_overrides {
-        compatible = "zmk,key-overrides";
-
-        a_ring_override: a_ring_override {
-            // When this key is pressed...
-
-            trigger = <&kp BSLH>;
-
-            // ...and this modifier is ALREADY held...
-
-            mods = <(MOD_LALT | MOD_RALT)>;
-
-            // ...replace it with this key instead.
-
-            override = <&kp LBRC>;
-        };
-    };
-}; // <-- This is the FINAL bracket
+};
