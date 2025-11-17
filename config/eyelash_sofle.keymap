@@ -32,23 +32,26 @@
 
         bslh_or_a_ring: bslh_or_a_ring {
             compatible = "zmk,behavior-mod-morph";
+            label = "BSLH_OR_A_RING"; // Added label for ZMK Studio
             #binding-cells = <0>;
             bindings = <&kp BSLH>, <&kp RALT(LBRC)>;
             mods = <(MOD_LALT | MOD_RALT)>;
         };
+
         gresc: grave_escape {
             compatible = "zmk,behavior-mod-morph";
+            label = "GRAVE_ESCAPE"; // Added label for ZMK Studio
             #binding-cells = <0>;
             bindings = <&kp ESC>, <&kp A>;
-            mods = <(MOD_LGUI|MOD_LSFT|MOD_RGUI|MOD_RSFT)>;
-        }
+            mods = <(MOD_LGUI | MOD_LSFT | MOD_RGUI | MOD_RSFT)>;
+        }; // <-- THIS SEMICOLON WAS MISSING
+
     };
 
     scroll_encoder: scroll_encoder {
         compatible = "zmk,behavior-sensor-rotate";
         #sensor-binding-cells = <0>;
         bindings = <&msc SCRL_DOWN>, <&msc SCRL_UP>;
-
         tap-ms = <30>;
     };
 
@@ -58,15 +61,15 @@
         // --- THIS IS YOUR NEW layer0 (FROM IMAGE 1) ---
         layer0 {
             bindings = <
-&gresc   &kp N1    &kp N2    &kp N3    &kp N4    &kp N5        &kp UP_ARROW      &kp N6    &kp N7    &kp N8    &kp N9    &kp N0    &kp DELETE
+&gresc    &kp N1    &kp N2    &kp N3    &kp N4    &kp N5        &kp UP_ARROW      &kp N6    &kp N7    &kp N8    &kp N9    &kp N0    &kp DELETE
 &kp TAB   &kp Q     &kp W     &kp E     &kp R     &kp T         &kp ENTER         &kp Y     &kp U     &kp I     &kp O     &kp P     &bslh_or_a_ring
 &kp LSHFT &kp A     &kp S     &kp D     &kp F     &kp G         &kp LEFT_ARROW    &kp H     &kp J     &kp K     &kp L     &kp SEMI  &kp APOS
 &kp LCTRL &kp Z     &kp X     &kp C     &kp V     &kp B         &kp RIGHT_ARROW   &kp N     &kp M     &kp COMMA &kp DOT   &kp FSLH  &kp RSHFT
 &kp LCTRL &kp LGUI  &kp LALT  &mo 1     &mo 2     &kp DOWN_ARROW    &kp BACKSPACE &kp ENTER &mo 2     &mo 1     &kp RSHFT &kp RCTRL
             >;
-
-            // Encoder mapping for this layer
-            sensor-bindings = <&inc_dec_kp C_VOLUME_UP C_VOL_DN>;
+            
+            // The old, broken sensor-bindings line was REMOVED from here.
+            
             display-name = "LAYER0";
         };
 
@@ -81,7 +84,7 @@
             >;
 
             display-name = "layer1";
-            sensor-bindings = <&scroll_encoder>;
+            // The old, broken sensor-bindings line was REMOVED from here.
         };
 
         // --- THIS IS YOUR ORIGINAL layer_2 (SYSTEM LAYER) ---
@@ -95,7 +98,24 @@
             >;
 
             display-name = "layer2";
-            sensor-bindings = <&scroll_encoder>;
+            // The old, broken sensor-bindings line was REMOVED from here.
         };
+    };
+
+    // --- NEW, CORRECT ENCODER CODE ---
+    // (This replaces the old sensor-bindings lines)
+    sensors {
+        compatible = "zmk,keymap-sensors";
+        triggers-per-rotation = <20>;
+        // Left encoder
+        sensors = <&left_encoder>;
+        // Maps to Volume Up/Down on layer 0
+        // Maps to Scroll Up/Down on layers 1 & 2
+        bindings = <&inc_dec_kp C_VOLUME_UP C_VOL_DN>, <&scroll_encoder>, <&scroll_encoder>;
+
+        // Right encoder
+        sensors = <&right_encoder>;
+        // Maps to Scroll Up/Down on all layers
+        bindings = <&scroll_encoder>, <&scroll_encoder>, <&scroll_encoder>;
     };
 };
