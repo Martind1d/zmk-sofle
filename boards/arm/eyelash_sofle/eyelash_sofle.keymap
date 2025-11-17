@@ -30,17 +30,18 @@
             delay-ms = <0>;                  // 10
         };
 
-        // --- THIS IS YOUR NEW, FIXED BEHAVIOR ---
         bslh_or_a_ring: bslh_or_a_ring {
             compatible = "zmk,behavior-mod-morph";
-            label = "BSLH_OR_A_RING";
             #binding-cells = <0>;
-
-            // 1. Normal press: Backslash
-            // 2. Alt-press: Sends "Alt + Left Bracket"
             bindings = <&kp BSLH>, <&kp RALT(LBRC)>;
             mods = <(MOD_LALT | MOD_RALT)>;
         };
+        gresc: grave_escape {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&kp ESC>, <&kp A>;
+            mods = <(MOD_LGUI|MOD_LSFT|MOD_RGUI|MOD_RSFT)>;
+        }
     };
 
     scroll_encoder: scroll_encoder {
@@ -57,7 +58,7 @@
         // --- THIS IS YOUR NEW layer0 (FROM IMAGE 1) ---
         layer0 {
             bindings = <
-&kp ESC   &kp N1    &kp N2    &kp N3    &kp N4    &kp N5        &kp UP_ARROW      &kp N6    &kp N7    &kp N8    &kp N9    &kp N0    &kp DELETE
+&gresc   &kp N1    &kp N2    &kp N3    &kp N4    &kp N5        &kp UP_ARROW      &kp N6    &kp N7    &kp N8    &kp N9    &kp N0    &kp DELETE
 &kp TAB   &kp Q     &kp W     &kp E     &kp R     &kp T         &kp ENTER         &kp Y     &kp U     &kp I     &kp O     &kp P     &bslh_or_a_ring
 &kp LSHFT &kp A     &kp S     &kp D     &kp F     &kp G         &kp LEFT_ARROW    &kp H     &kp J     &kp K     &kp L     &kp SEMI  &kp APOS
 &kp LCTRL &kp Z     &kp X     &kp C     &kp V     &kp B         &kp RIGHT_ARROW   &kp N     &kp M     &kp COMMA &kp DOT   &kp FSLH  &kp RSHFT
