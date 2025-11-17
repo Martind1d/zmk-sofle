@@ -35,11 +35,11 @@
             compatible = "zmk,behavior-mod-morph";
             label = "BSLH_OR_A_RING";
             #binding-cells = <0>;
-            mods = <(MOD_LALT | MOD_RALT)>;
 
             // 1. Normal press: Backslash
             // 2. Alt-press: Sends "Alt + Left Bracket"
-            bindings = <&kp BSLH>, <&kp LALT(LBRC)>;
+            bindings = <&kp BSLH>, <&kp RALT(LBRC)>;
+            mods = <(MOD_LALT | MOD_RALT)>;
         };
     };
 
