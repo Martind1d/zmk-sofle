@@ -43,7 +43,7 @@
         backslash: backslash {
             compatible = "zmk,behavior-mod-morph";
             label = "BACKSLASH";
-            bindings = <&kt BACKSLASH>, <&kp LBKT>;
+            bindings = <&kp BACKSLASH>, <&kp LBKT>;
 
             #binding-cells = <0>;
             mods = <(MOD_RALT|MOD_LALT)>;
