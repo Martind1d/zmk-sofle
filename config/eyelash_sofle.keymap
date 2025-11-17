@@ -32,7 +32,7 @@
 
         bslh_or_a_ring: bslh_or_a_ring {
             compatible = "zmk,behavior-mod-morph";
-            label = "BSLH_OR_A_RING"; // Added label for ZMK Studio
+            label = "BSLH_OR_A_RING";
             #binding-cells = <0>;
             bindings = <&kp BSLH>, <&kp RALT(LBRC)>;
             mods = <(MOD_LALT | MOD_RALT)>;
@@ -40,12 +40,11 @@
 
         gresc: grave_escape {
             compatible = "zmk,behavior-mod-morph";
-            label = "GRAVE_ESCAPE"; // Added label for ZMK Studio
+            label = "GRAVE_ESCAPE";
             #binding-cells = <0>;
             bindings = <&kp ESC>, <&kp A>;
             mods = <(MOD_LGUI | MOD_LSFT | MOD_RGUI | MOD_RSFT)>;
-        }; // <-- THIS SEMICOLON WAS MISSING
-
+        };
     };
 
     scroll_encoder: scroll_encoder {
@@ -68,7 +67,8 @@
 &kp LCTRL &kp LGUI  &kp LALT  &mo 1     &mo 2     &kp DOWN_ARROW    &kp BACKSPACE &kp ENTER &mo 2     &mo 1     &kp RSHFT &kp RCTRL
             >;
             
-            // The old, broken sensor-bindings line was REMOVED from here.
+            // --- THIS IS THE OLD, WORKING ENCODER SYNTAX ---
+            sensor-bindings = <&inc_dec_kp C_VOLUME_UP C_VOL_DN>;
             
             display-name = "LAYER0";
         };
@@ -84,7 +84,8 @@
             >;
 
             display-name = "layer1";
-            // The old, broken sensor-bindings line was REMOVED from here.
+            // --- THIS IS THE OLD, WORKING ENCODER SYNTAX ---
+            sensor-bindings = <&scroll_encoder>;
         };
 
         // --- THIS IS YOUR ORIGINAL layer_2 (SYSTEM LAYER) ---
@@ -98,24 +99,10 @@
             >;
 
             display-name = "layer2";
-            // The old, broken sensor-bindings line was REMOVED from here.
+            // --- THIS IS THE OLD, WORKING ENCODER SYNTAX ---
+            sensor-bindings = <&scroll_encoder>;
         };
     };
-
-    // --- NEW, CORRECT ENCODER CODE ---
-    // (This replaces the old sensor-bindings lines)
-    sensors {
-        compatible = "zmk,keymap-sensors";
-        triggers-per-rotation = <20>;
-        // Left encoder
-        sensors = <&left_encoder>;
-        // Maps to Volume Up/Down on layer 0
-        // Maps to Scroll Up/Down on layers 1 & 2
-        bindings = <&inc_dec_kp C_VOLUME_UP C_VOL_DN>, <&scroll_encoder>, <&scroll_encoder>;
-
-        // Right encoder
-        sensors = <&right_encoder>;
-        // Maps to Scroll Up/Down on all layers
-        bindings = <&scroll_encoder>, <&scroll_encoder>, <&scroll_encoder>;
-    };
+    
+    // The new, broken "sensors { ... }" block has been DELETED
 };
