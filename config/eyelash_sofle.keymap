@@ -40,10 +40,10 @@
             mods = <(MOD_LGUI | MOD_LSFT | MOD_RGUI | MOD_RSFT)>;
         };
 
-        new_behavior: new_behavior {
+        backslash: backslash {
             compatible = "zmk,behavior-mod-morph";
-            label = "NEW_BEHAVIOR";
-            bindings = <&kt BACKSLASH>, <&kp RA(LEFT_BRACKET)>;
+            label = "BACKSLASH";
+            bindings = <&kt BACKSLASH>, <&kp LBKT>;
 
             #binding-cells = <0>;
             mods = <(MOD_RALT|MOD_LALT)>;
@@ -68,7 +68,7 @@
         layer0 {
             bindings = <
 &gresc     &kp N1    &kp N2    &kp N3  &kp N4  &kp N5            &kp UP_ARROW     &kp N6     &kp N7  &kp N8     &kp N9     &kp N0     &kp DELETE
-&kp TAB    &kp Q     &kp W     &kp E   &kp R   &kp T             &kp ENTER        &kp Y      &kp U   &kp I      &kp O      &kp P      &new_behavior
+&kp TAB    &kp Q     &kp W     &kp E   &kp R   &kp T             &kp ENTER        &kp Y      &kp U   &kp I      &kp O      &kp P      &backslash
 &kp LSHFT  &kp A     &kp S     &kp D   &kp F   &kp G             &kp LEFT_ARROW   &kp H      &kp J   &kp K      &kp L      &kp SEMI   &kp APOS
 &kp LCTRL  &kp Z     &kp X     &kp C   &kp V   &kp B             &kp RIGHT_ARROW  &kp N      &kp M   &kp COMMA  &kp DOT    &kp FSLH   &kp RSHFT
 &kp LCTRL  &kp LGUI  &kp LALT  &mo 1   &mo 2   &kp DOWN_ARROW    &kp BACKSPACE    &kp ENTER  &mo 2   &mo 1      &kp RSHFT  &kp RCTRL
@@ -109,6 +109,5 @@
             display-name = "layer2";
             sensor-bindings = <&scroll_encoder>;
         };
-    }; 
-
+    };
 };
