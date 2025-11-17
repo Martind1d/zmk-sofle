@@ -47,6 +47,7 @@
 
             #binding-cells = <0>;
             mods = <(MOD_RALT|MOD_LALT)>;
+            keep-mods = <(MOD_RALT)>;
         };
 
         // We deleted the bslh_or_a_ring behavior because we're using key-overrides
