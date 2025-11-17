@@ -34,8 +34,8 @@
             compatible = "zmk,behavior-mod-morph";
             label = "BSLH_OR_A_RING";
             #binding-cells = <0>;
-            bindings = <&kp BSLH>, <&kp LBRC>;
-            mods = <(MOD_LALT | MOD_RALT)>;
+            bindings = <&kp BSLH>, <&kp RA(LBRC)>;
+            mods = <(MOD_LALT|MOD_RALT)>;
         };
 
     };
