@@ -29,7 +29,17 @@
             time-to-max-speed-ms = <400>;    // 500
             delay-ms = <0>;                  // 10
         };
-
+        
+        // Your custom grave/escape key
+        gresc: grave_escape {
+            compatible = "zmk,behavior-mod-morph";
+            label = "GRAVE_ESCAPE";
+            #binding-cells = <0>;
+            bindings = <&kp ESC>, <&kp A>;
+            mods = <(MOD_LGUI | MOD_LSFT | MOD_RGUI | MOD_RSFT)>;
+        };
+        
+        // We deleted the bslh_or_a_ring behavior because we're using key-overrides
     };
 
     scroll_encoder: scroll_encoder {
@@ -45,8 +55,8 @@
         // --- THIS IS YOUR NEW layer0 (FROM IMAGE 1) ---
         layer0 {
             bindings = <
-&kp ESC    &kp N1    &kp N2    &kp N3    &kp N4    &kp N5        &kp UP_ARROW      &kp N6    &kp N7    &kp N8    &kp N9    &kp N0    &kp DELETE
-&kp TAB   &kp Q     &kp W     &kp E     &kp R     &kp T         &kp ENTER         &kp Y     &kp U     &kp I     &kp O     &kp P     &BSLH
+&gresc    &kp N1    &kp N2    &kp N3    &kp N4    &kp N5        &kp UP_ARROW      &kp N6    &kp N7    &kp N8    &kp N9    &kp N0    &kp DELETE
+&kp TAB   &kp Q     &kp W     &kp E     &kp R     &kp T         &kp ENTER         &kp Y     &kp U     &kp I     &kp O     &kp P     &kp BSLH
 &kp LSHFT &kp A     &kp S     &kp D     &kp F     &kp G         &kp LEFT_ARROW    &kp H     &kp J     &kp K     &kp L     &kp SEMI  &kp APOS
 &kp LCTRL &kp Z     &kp X     &kp C     &kp V     &kp B         &kp RIGHT_ARROW   &kp N     &kp M     &kp COMMA &kp DOT   &kp FSLH  &kp RSHFT
 &kp LCTRL &kp LGUI  &kp LALT  &mo 1     &mo 2     &kp DOWN_ARROW    &kp BACKSPACE &kp ENTER &mo 2     &mo 1     &kp RSHFT &kp RCTRL
@@ -69,39 +79,10 @@
             >;
 
             display-name = "layer1";
-            // --- THIS IS THE OLD, WORKING ENCODER SYNTAX ---
             sensor-bindings = <&scroll_encoder>;
         };
 
         // --- THIS IS YOUR ORIGINAL layer_2 (SYSTEM LAYER) ---
         layer_2 {
             bindings = <
-&kp TILDE &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4    &mmv MOVE_UP      &kp F6  &kp F7  &kp F8    &kp F9    &kp F10   &trans
-&studio_unlock    &bt BT_CLR    &bt BT_CLR_ALL  &trans        &trans        &trans          &mmv MOVE_DOWN    &trans  &trans  &kp F11   &kp F12   &kp UNDER &kp PLUS
-&trans    &out OUT_USB  &out OUT_BLE  &trans        &trans        &trans          &mmv MOVE_LEFT     &trans  &trans  &trans    &trans    &kp LBRC  &kp RBRC
-&trans    &sys_reset  &trans        &bootloader   &trans        &trans          &mmv MOVE_RIGHT   &trans  &trans  &sys_reset &soft_off &bootloader &trans
-&trans    &trans      &trans        &trans        &trans        &trans          &mkp LCLK         &trans  &trans  &trans    &trans    &trans
-            >;
-
-            display-name = "layer2";
-            // --- THIS IS THE OLD, WORKING ENCODER SYNTAX ---
-            sensor-bindings = <&scroll_encoder>;
-        };
-key_overrides {
-        compatible = "zmk,key-overrides";
-
-        // This is a name for your override, e.g. "å on Alt"
-        a_ring_override: a_ring_override {
-            // When this key is pressed...
-            trigger = <&kp BSLH>;
-            
-            // ...and this modifier is ALREADY held...
-            mods = <(MOD_LALT | MOD_RALT)>;
-            
-            // ...replace it with this key instead.
-            override = <&kp LBRC>;
-        };
-    };
-    
-    // The new, broken "sensors { ... }" block has been DELETED
-};
+&kp TILDE &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4    &mmv MOVE_UP      &kp F6  &kp F7
