@@ -30,14 +30,6 @@
             delay-ms = <0>;                  // 10
         };
 
-        bslh_or_a_ring: bslh_or_a_ring {
-            compatible = "zmk,behavior-mod-morph";
-            label = "BSLH_OR_A_RING";
-            #binding-cells = <0>;
-            bindings = <&kp BSLH>, <&kp RA(LEFT_BRACE)>;
-            mods = <(MOD_LALT|MOD_RALT)>;
-        };
-
     };
 
     scroll_encoder: scroll_encoder {
@@ -54,7 +46,7 @@
         layer0 {
             bindings = <
 &kp ESC    &kp N1    &kp N2    &kp N3    &kp N4    &kp N5        &kp UP_ARROW      &kp N6    &kp N7    &kp N8    &kp N9    &kp N0    &kp DELETE
-&kp TAB   &kp Q     &kp W     &kp E     &kp R     &kp T         &kp ENTER         &kp Y     &kp U     &kp I     &kp O     &kp P     &bslh_or_a_ring
+&kp TAB   &kp Q     &kp W     &kp E     &kp R     &kp T         &kp ENTER         &kp Y     &kp U     &kp I     &kp O     &kp P     &BSLH
 &kp LSHFT &kp A     &kp S     &kp D     &kp F     &kp G         &kp LEFT_ARROW    &kp H     &kp J     &kp K     &kp L     &kp SEMI  &kp APOS
 &kp LCTRL &kp Z     &kp X     &kp C     &kp V     &kp B         &kp RIGHT_ARROW   &kp N     &kp M     &kp COMMA &kp DOT   &kp FSLH  &kp RSHFT
 &kp LCTRL &kp LGUI  &kp LALT  &mo 1     &mo 2     &kp DOWN_ARROW    &kp BACKSPACE &kp ENTER &mo 2     &mo 1     &kp RSHFT &kp RCTRL
@@ -94,6 +86,20 @@
             display-name = "layer2";
             // --- THIS IS THE OLD, WORKING ENCODER SYNTAX ---
             sensor-bindings = <&scroll_encoder>;
+        };
+key_overrides {
+        compatible = "zmk,key-overrides";
+
+        // This is a name for your override, e.g. "å on Alt"
+        a_ring_override: a_ring_override {
+            // When this key is pressed...
+            trigger = <&kp BSLH>;
+            
+            // ...and this modifier is ALREADY held...
+            mods = <(MOD_LALT | MOD_RALT)>;
+            
+            // ...replace it with this key instead.
+            override = <&kp LBRC>;
         };
     };
     
