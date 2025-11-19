@@ -41,6 +41,35 @@
             keep-mods = <(MOD_RALT)>;
         };
 
+        colon_and_oe: colon_and_oe {
+            compatible = "zmk,behavior-mod-morph";
+            label = "COLON_AND_OE";
+            bindings = <&kp SEMICOLON>, <&kp RA(SEMICOLON)>;
+
+            #binding-cells = <0>;
+            keep-mods = <(MOD_RALT)>;
+            mods = <(MOD_RALT|MOD_LALT)>;
+        };
+
+        quote_and_ae: quote_and_ae {
+            compatible = "zmk,behavior-mod-morph";
+            label = "QUOTE_AND_AE";
+            bindings = <&kp SQT>, <&kp RA(SQT)>;
+
+            #binding-cells = <0>;
+            mods = <(MOD_LALT|MOD_RALT)>;
+            keep-mods = <(MOD_RALT)>;
+        };
+
+        esc_and_tilde: esc_and_tilde {
+            compatible = "zmk,behavior-mod-morph";
+            label = "ESC_AND_TILDE";
+            bindings = <&kp ESCAPE>, <&kp TILDE>;
+
+            #binding-cells = <0>;
+            mods = <(MOD_LALT)>;
+        };
+
         // We deleted the bslh_or_a_ring behavior because we're using key-overrides
     };
 
@@ -59,11 +88,11 @@
 
         layer0 {
             bindings = <
-&kp ESC     &kp N1  &kp N2    &kp N3        &kp N4  &kp N5       &kp UP_ARROW     &kp N6         &kp N7     &kp N8         &kp N9     &kp N0     &kp DELETE
-&kp TAB     &kp Q   &kp W     &kp E         &kp R   &kp T        &kp DOWN_ARROW   &kp Y          &kp U      &kp I          &kp O      &kp P      &backslash
-&kp LSHFT   &kp A   &kp S     &kp D         &kp F   &kp G        &kp LEFT_ARROW   &kp H          &kp J      &kp K          &kp L      &kp SEMI   &kp APOS
-&kp LCTRL   &kp Z   &kp X     &kp C         &kp V   &kp B        &kp RIGHT_ARROW  &kp N          &kp M      &kp COMMA      &kp DOT    &kp FSLH   &kp RSHFT
-&kp K_MUTE  &to 2   &kp LALT  &kp LEFT_GUI  &mo 1   &kp SPACE    &kp ENTER        &kp BACKSPACE  &kp ENTER  &kp RIGHT_ALT  &kp RSHFT  &kp RCTRL
+&esc_and_tilde  &kp N1  &kp N2    &kp N3        &kp N4  &kp N5       &kp UP_ARROW     &kp N6         &kp N7     &kp N8        &kp N9     &kp N0         &kp DELETE
+&kp TAB         &kp Q   &kp W     &kp E         &kp R   &kp T        &kp DOWN_ARROW   &kp Y          &kp U      &kp I         &kp O      &kp P          &backslash
+&kp LSHFT       &kp A   &kp S     &kp D         &kp F   &kp G        &kp LEFT_ARROW   &kp H          &kp J      &kp K         &kp L      &colon_and_oe  &quote_and_ae
+&kp LCTRL       &kp Z   &kp X     &kp C         &kp V   &kp B        &kp RIGHT_ARROW  &kp N          &kp M      &kp COMMA     &kp DOT    &kp FSLH       &kp RSHFT
+&kp K_MUTE      &to 2   &kp LALT  &kp LEFT_GUI  &mo 1   &kp SPACE    &kp ENTER        &kp BACKSPACE  &kp ENTER  &kp LEFT_ALT  &kp RSHFT  &kp RCTRL
             >;
 
             // --- THIS IS THE OLD, WORKING ENCODER SYNTAX ---
